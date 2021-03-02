@@ -11,15 +11,15 @@ const sqSeven = document.querySelector("#seven")
 const sqEight = document.querySelector("#eight")
 const sqNine = document.querySelector("#nine")
 // const for boxes (red)
-const b1 = getComputedStyle(sqOne).backgroundColor
-const b2 = getComputedStyle(sqTwo).backgroundColor
-const b3 = getComputedStyle(sqThree).backgroundColor
-const b4 = getComputedStyle(sqFour).backgroundColor
-const b5 = getComputedStyle(sqFive).backgroundColor
-const b6 = getComputedStyle(sqSix).backgroundColor
-const b7 = getComputedStyle(sqSeven).backgroundColor
-const b8 = getComputedStyle(sqEight).backgroundColor
-const b9 = getComputedStyle(sqNine).backgroundColor
+const b1 = getComputedStyle(sqOne).backgroundColor === "rgb(255, 0, 0)"
+const b2 = getComputedStyle(sqTwo).backgroundColor === "rgb(255, 0, 0)"
+const b3 = getComputedStyle(sqThree).backgroundColor === "rgb(255, 0, 0)"
+const b4 = getComputedStyle(sqFour).backgroundColor === "rgb(255, 0, 0)"
+const b5 = getComputedStyle(sqFive).backgroundColor === "rgb(255, 0, 0)"
+const b6 = getComputedStyle(sqSix).backgroundColor === "rgb(255, 0, 0)"
+const b7 = getComputedStyle(sqSeven).backgroundColor === "rgb(255, 0, 0)"
+const b8 = getComputedStyle(sqEight).backgroundColor === "rgb(255, 0, 0)"
+const b9 = getComputedStyle(sqNine).backgroundColor === "rgb(255, 0, 0)"
 // const for boxes (blue)
 const b1b = getComputedStyle(sqOne).backgroundColor === "rgb(0, 0, 255)"
 const b2b = getComputedStyle(sqTwo).backgroundColor === "rgb(0, 0, 255)"
@@ -50,30 +50,39 @@ squares.forEach(item => { // The purpose of this loop is to make every square li
         // first row ------------------ //
         if(Math.random() < 1/3){
           if(Math.random() < 1/3 && (getComputedStyle(sqOne).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqOne).backgroundColor !== "rgb(0, 0, 255)")){
+            // console.log("heya1")
             sqOne.style.backgroundColor = "blue"
           }else if(1/3 < Math.random() < 2/3 && (getComputedStyle(sqTwo).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqTwo).backgroundColor !== "rgb(0, 0, 255)")){
+            // console.log("heya2")
             sqTwo.style.backgroundColor = "blue"
           }else if(getComputedStyle(sqThree).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqThree).backgroundColor !== "rgb(0, 0, 255)"){
+            // console.log("heya3")
             sqThree.style.backgroundColor = "blue"
           }
         }
         // second row ---------------- //
         else if(1/3 < Math.random() < 2/3){
           if(Math.random() < 1/3 && (getComputedStyle(sqFour).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqFour).backgroundColor !== "rgb(0, 0, 255)")){
+            // console.log("heya4")
             sqFour.style.backgroundColor = "blue"
           }else if(1/3 < Math.random() < 2/3 && (getComputedStyle(sqFive).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqFive).backgroundColor !== "rgb(0, 0, 255)")){
+            // console.log("heya5")
             sqFive.style.backgroundColor = "blue"
           }else if(getComputedStyle(sqSix).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqSix).backgroundColor !== "rgb(0, 0, 255)"){
+            // console.log("heya6")
             sqSix.style.backgroundColor = "blue"
           }
         }
         // third row ---------------- //
         else{
           if(Math.random() < 1/3 && (getComputedStyle(sqSeven).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqSeven).backgroundColor !== "rgb(0, 0, 255)")){
+            // console.log("heya7")
             sqSeven.style.backgroundColor = "blue"
           }else if(1/3 < Math.random() < 2/3 && (getComputedStyle(sqEight).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqEight).backgroundColor !== "rgb(0, 0, 255)")){
+            // console.log("heya8")
             sqEight.style.backgroundColor = "blue"
           }else if(getComputedStyle(sqNine).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqNine).backgroundColor !== "rgb(0, 0, 255)"){
+            // console.log("heya9")
             sqNine.style.backgroundColor = "blue"
           }
         }
@@ -86,3 +95,23 @@ squares.forEach(item => { // The purpose of this loop is to make every square li
   })
 
 })
+
+// if (getComputedStyle(sqOne).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqOne).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqOne.style.backgroundColor = "blue"
+// }else if (getComputedStyle(sqTwo).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqTwo).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqTwo.style.backgroundColor = "blue"
+// }else if (getComputedStyle(sqThree).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqThree).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqThree.style.backgroundColor = "blue"
+// }else if (getComputedStyle(sqFour).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqFour).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqFour.style.backgroundColor = "blue"
+// }else if (getComputedStyle(sqFive).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqFive).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqFive.style.backgroundColor = "blue"
+// }else if (getComputedStyle(sqSix).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqSix).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqSix.style.backgroundColor = "blue"
+// }else if (getComputedStyle(sqSeven).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqSeven).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqSeven.style.backgroundColor = "blue"
+// }else if (getComputedStyle(sqEight).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqEight).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqEight.style.backgroundColor = "blue"
+// }else if (getComputedStyle(sqNine).backgroundColor !== "rgb(255, 0, 0)" && getComputedStyle(sqNine).backgroundColor !== "rgb(0, 0, 255)"){
+//   sqNine.style.backgroundColor = "blue"
+// }
