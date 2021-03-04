@@ -1,84 +1,86 @@
 // const for DOM ------------------ //
 const btn = document.querySelector("button")
 const squares = document.querySelectorAll(".square")
-const sqOne = document.querySelector("#one")
-const sqTwo = document.querySelector("#two")
-const sqThree = document.querySelector("#three")
-const sqFour = document.querySelector("#four")
-const sqFive = document.querySelector("#five")
-const sqSix = document.querySelector("#six")
-const sqSeven = document.querySelector("#seven")
-const sqEight = document.querySelector("#eight")
-const sqNine = document.querySelector("#nine")
-
+const overlay = document.querySelector("#overlay")
+const whoWon = document.querySelector("#whoWon")
+const playerTurn = document.querySelector("#playerTurn")
 // expr for logic ------------------ //
-squares.forEach(item => { // The purpose of this loop is to make every square listened
-  item.addEventListener("click", function(){
-    item.style.backgroundColor = "red"; // This line is for making the clicked square turns red
-    // conditionals for bot ----------- //
-    setTimeout(function(){
-      if (getComputedStyle(item).backgroundColor === "rgb(255, 0, 0)"){
-        // first row ------------------ //
-        if(Math.random() < 1/3){
-          if(Math.random() < 1/3){
-            sqOne.style.backgroundColor = "blue"
-          }else if(1/3 < Math.random() < 2/3){
-            sqTwo.style.backgroundColor = "blue"
-          }else{
-            sqThree.style.backgroundColor = "blue"
-          }
-        }
-        // second row ---------------- //
-        else if(1/3 < Math.random() < 2/3){
-          if(Math.random() < 1/3){
-            sqFour.style.backgroundColor = "blue"
-          }else if(1/3 < Math.random() < 2/3){
-            sqFive.style.backgroundColor = "blue"
-          }else{
-            sqSix.style.backgroundColor = "blue"
-          }
-        }
-        // third row ---------------- //
-        else{
-          if(Math.random() < 1/3){
-            sqSeven.style.backgroundColor = "blue"
-          }else if(1/3 < Math.random() < 2/3){
-            sqEight.style.backgroundColor = "blue"
-          }else{
-            sqNine.style.backgroundColor = "blue"
-          }
-        }
+let game = {
+  currentPlayer : "X",
+  winCond : [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ],
+  gameCond : ["", "", "", "", "", "", "", "", ""],
+  domPrint : function(){
+    playerTurn.innerText = `Player ${this.currentPlayer} turn`
+  },
+  playerHandler : function(){
+    this.currentPlayer === "X" ? this.currentPlayer = "O" : this.currentPlayer = "X";
+    playerTurn.innerText = `Player ${this.currentPlayer} turn`;
+  }
+}
 
+let boxClick = {
+  clickHandler : function(){
+    squares.forEach(item => {
+      item.addEventListener("click", function(){
+        item.innerText = game.currentPlayer;
+        game.gameCond[Number(item.getAttribute("data-cell-index"))] = game.currentPlayer;
+        resultCheck.run()
+      })
+    })
+  }
+}
 
-
-
-
-
-        // if (Math.random()*50+1 < 5.67){
-        //   sqOne.style.backgroundColor = "blue"
-        // }else if (Math.random()*50+1 < 11.34){
-        //   sqTwo.style.backgroundColor = "blue"
-        // }else if (Math.random()*50+1 < 17.01){
-        //   sqThree.style.backgroundColor = "blue"
-        // }else if (Math.random()*50+1 < 22.68){
-        //   sqFour.style.backgroundColor = "blue"
-        // }else if (Math.random()*50+1 < 28.35){
-        //   sqFive.style.backgroundColor = "blue"
-        // }else if (Math.random()*50+1 < 34.02){
-        //   sqSix.style.backgroundColor = "blue"
-        // }else if (Math.random()*50+1 < 39.69){
-        //   sqSeven.style.backgroundColor = "blue"
-        // }else if (Math.random()*50+1 < 45.36){
-        //   sqEight.style.backgroundColor = "blue"
-        // }else{
-        //   sqNine.style.backgroundColor = "blue"
-        // }
+let resultCheck = {
+  run : function(){
+    let roundWon = false;
+    for (let i = 0; i < 8; i++){
+      const winCheck = game.winCond[i]
+      let c1 = game.gameCond[winCheck[0]]
+      let c2 = game.gameCond[winCheck[1]]
+      let c3 = game.gameCond[winCheck[2]]
+      if (c1 === "" || c2 === "" || c3 === ""){
+        continue;
       }
-    }, 300)
-  })
-  // expr for new Game ---------------- //
-  btn.addEventListener("click", function(){
-    item.removeAttribute("style")
-  })
+      if (c1 === c2 && c2 === c3){
+        roundWon = true;
+        break;
+      }
+    }
+    if (roundWon){
+      whoWon.innerText = `Player ${game.currentPlayer} win!`;
+      overlay.classList.add("overlay")
+      return;
+    }
+    if (!game.gameCond.includes("")){
+      whoWon.innerText = `It's a draw!`
+      overlay.classList.add("overlay")
+      return;
+    }
+    game.playerHandler();
+  }
+}
 
-})
+let newGame = {
+  run : function(){
+    btn.addEventListener("click", function(){
+      game.gameCond = ["", "", "", "", "", "", "", "", ""];
+      game.currentPlayer = "X";
+      squares.forEach(item => item.innerText = null);
+      whoWon.innerText = "";
+      overlay.classList.remove("overlay");
+    })
+  }
+}
+// method call ------------------- //
+game.domPrint();
+boxClick.clickHandler();
+newGame.run();
